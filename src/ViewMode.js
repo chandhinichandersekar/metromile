@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
-import VehicleData from './data/vehicle.json';
-import EditMode from './EditMode';
+import EditMode, { findOption } from './EditMode';
 import CoverageChange from './CoverageChange';
 import './App.css';
-
+import Layout from './Layout';
 
 
 class ViewMode extends Component {
     constructor(props) {
         super(props);
+        const { vehicleData } = props;
         this.state = {
             showComponent: false,
-            compDeduc: VehicleData.compDeductible,
-            collDeduc: VehicleData.collDeductible,
-            rentalReimburst: VehicleData.rentalCar,
-            roadAssis: VehicleData.roadside
+            compDeductible: vehicleData.compDeductible,
+            collDeduc: vehicleData.collDeductible,
+            rentalReimburst: vehicleData.rentalCar,
+            roadAssis: vehicleData.roadside,
+            changes: {
+                compDeductible: findOption(vehicleData.compDeductible, 'compDeductible'),
+                collDeductible: findOption(vehicleData.collDeductible, 'collDeductible'),
+                rentalCar: findOption(vehicleData.rentalCar, 'rentalCar'),
+                roadside: findOption(vehicleData.roadside, 'roadside')
+            }
         };
         this._onButtonClick = this._onButtonClick.bind(this);
+    }
+
+    handleChangesFromEditMode(changes) {
+        this.setState({
+            changes
+        })
     }
 
 
@@ -28,9 +40,8 @@ class ViewMode extends Component {
 
     render() {
         return (
-            <div className='ViewMode'>
-                <div className="card">
-                    <h3 className="card-header">{VehicleData.name}</h3>
+            <React.Fragment>
+                <Layout title={this.props.vehicleData.name}>
                     <div className="card-block">
                         <div className="card-text">
                             <div className="row">
@@ -41,7 +52,7 @@ class ViewMode extends Component {
                                     <p>Roadside Assistance</p>
                                 </div>
                                 <div className="column-value">
-                                    <p>${this.state.compDeduc}</p>
+                                    <p>${this.state.compDeductible}</p>
                                     <p>${this.state.collDeduc}</p>
                                     <p>{this.state.rentalReimburst === 'false' ? 'No' : 'Yes'}</p>
                                     <p>{this.state.roadAssis === 'false' ? 'No' : 'Yes'}</p>
@@ -49,19 +60,20 @@ class ViewMode extends Component {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button className='editCoverage' onClick={this._onButtonClick}>EDIT COVERAGE</button>  </div>
+                            <button className='editCoverage' onClick={this._onButtonClick}>EDIT COVERAGE</button>  
+                        </div>
                     </div>
-                </div>
+                </Layout>
                 {this.state.showComponent ?
-                    <EditMode />  :
+                    <EditMode vehicleData={this.props.vehicleData} handleChangesFromEditMode={this.handleChangesFromEditMode.bind(this)}/> :
                     null
                 }
                 {this.state.showComponent ?
-                   <CoverageChange /> :
+                    <CoverageChange changes={this.state.changes}/> :
                     null
                 }
-                
-            </div>
+            </React.Fragment>
+
         );
     }
 }

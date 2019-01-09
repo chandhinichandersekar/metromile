@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
+import Layout from './Layout';
 
 class CoverageChange extends Component {
     render() {
         return (
-            <div className="card">
-                <h3 className="card-header">Coverage Changes</h3>
+            <Layout title="Coverage Changes">
                 <div className="card-block">
                     <div className="card-text">
-                            <label> Comprehensive Deductible </label>
-                            <label> Collision Deductible </label> 
-                            <label> Rental Imburstment</label> 
-                            <label> Roadside Assistant</label> 
+                            <label> Comprehensive Deductible {this.props.changes.compDeductible.name}</label>
+                            <label> Collision Deductible {this.props.changes.collDeductible.name}</label> 
+                            <label> Rental Imburstment  {this.props.changes.rentalCar.name}</label> 
+                            <label> Roadside Assistant {this.props.changes.roadside.name}</label> 
                     </div>
                 </div>
-            </div>
+                </Layout>
         );
     }
 }
