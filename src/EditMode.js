@@ -6,25 +6,11 @@ import Layout from './Layout';
 
 const highlightColor = "#17a2b8";
 
-export function findOption(value, name) {
-    const compDeductibleInfo = coverageData.coverageOptions.find(data => {
-        return data.name === name;
-    });
-    return compDeductibleInfo.options.find(option => {
-        return option.value === value;
-    })
-}
-
 class EditMode extends Component {
     constructor(props) {
         super(props);
         const { vehicleData }  = props;
-        this.state = {
-            compDeductible: findOption(vehicleData.compDeductible, 'compDeductible'),
-            collDeductible: findOption(vehicleData.collDeductible, 'collDeductible'),
-            rentalCar: findOption(vehicleData.rentalCar, 'rentalCar'),
-            roadside: findOption(vehicleData.roadside, 'roadside')
-        }
+        this.state = vehicleData
         this.handleClick = this.handleClick.bind(this);
     }
 
