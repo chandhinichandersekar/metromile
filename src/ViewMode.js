@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import EditMode from './EditMode';
 import CoverageChange from './CoverageChange';
 import './App.css';
-import Layout from './Layout';
+import InnerViewMode from './InnerViewMode';
 
+const pages = {
+    view: 0,
+    edit: 1
+}
 
 class ViewMode extends Component {
     constructor(props) {
@@ -12,9 +16,9 @@ class ViewMode extends Component {
         this.state = {
             showComponent: false,
             ...vehicleData,
-            changes: vehicleData
+            changes: vehicleData,
+            currentPage: pages.view
         };
-        this._onButtonClick = this._onButtonClick.bind(this);
     }
 
     handleChangesFromEditMode(changes) {
@@ -24,15 +28,16 @@ class ViewMode extends Component {
     }
 
 
-    _onButtonClick() {
+    editCoverageClick() {
         this.setState({
-            showComponent: true,
+            currentPage: pages.edit,
         });
     }
 
     handleSave() {
         this.setState({
-            ...this.state.changes
+            ...this.state.changes,
+            currentPage: pages.view
         })
         localStorage.setItem('vehicleData', JSON.stringify(
             {
@@ -43,42 +48,20 @@ class ViewMode extends Component {
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <Layout title={this.props.vehicleData.name}>
-                    <div className="card-block">
-                        <div className="card-text">
-                            <div className="row">
-                                <div className="column-title" >
-                                    <p>Comprehensive Deductable</p>
-                                    <p>Collison Deductib}le</p>
-                                    <p>Rental Reimburtment</p>
-                                    <p>Roadside Assistance</p>
-                                </div>
-                                <div className="column-value">
-                                    <p>{this.state.compDeductible.name}</p>
-                                    <p>{this.state.collDeductible.name}</p>
-                                    <p>{this.state.rentalCar.name}</p>
-                                    <p>{this.state.roadside.name}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card-footer">
-                            <button className='editCoverage' onClick={this._onButtonClick}>EDIT COVERAGE</button>
-                        </div>
-                    </div>
-                </Layout>
-                {this.state.showComponent ?
-                    <EditMode vehicleData={this.props.vehicleData} handleChangesFromEditMode={this.handleChangesFromEditMode.bind(this)} /> :
-                    null
-                }
-                {this.state.showComponent ?
-                    <CoverageChange changes={this.state.changes} handleSave={this.handleSave.bind(this)} /> :
-                    null
-                }
-            </React.Fragment>
-
-        );
+        const innerViewModeProps = {
+            ...this.state,
+            editCoverageClick: this.editCoverageClick.bind(this)
+        }
+        if (this.state.currentPage === pages.view) {
+            return <InnerViewMode {...innerViewModeProps} />;
+        } else {
+            return (
+                <React.Fragment>
+                    <EditMode vehicleData={this.state} handleChangesFromEditMode={this.handleChangesFromEditMode.bind(this)} />
+                    <CoverageChange changes={this.state.changes} handleSave={this.handleSave.bind(this)} />
+                </React.Fragment>
+            );
+        }
     }
 }
 
