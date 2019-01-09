@@ -47,7 +47,7 @@ class EditMode extends Component {
                 <div className="card-block">
                     <div className="card-text">
                     <div class="btn-group" style={{ display: 'block' }}>
-                            <label> Comprehensive Deductible </label>
+                            <label> {coverageData.coverageOptions[0].title} </label>
                             {coverageData.coverageOptions[0].options.map((dataItem, index) => {
                                 return <button type="button" className="btn btn-light"
                                     key={index} onClick={() => this.handleClick(dataItem, 'compDeductible')}
@@ -57,7 +57,7 @@ class EditMode extends Component {
                                 </button>
                             })}
                             <br />
-                            <label> Collision Deductible </label>
+                            <label> {coverageData.coverageOptions[1].title} </label>
                             {coverageData.coverageOptions[1].options.map((dataItem, index) => {
                                 return <button type="button" className="btn btn-light"
                                     key={index}
@@ -68,7 +68,7 @@ class EditMode extends Component {
                                 </button>
                             })}
                             <br />
-                            <label> Rental Imburstment</label>
+                            <label> {coverageData.coverageOptions[2].title}</label>
                             {coverageData.coverageOptions[2].options.map((dataItem, index) => {
                                 return <button type="button" className="rbtn btn-light" 
                                     key={index}
@@ -79,7 +79,7 @@ class EditMode extends Component {
                                 </button>
                             })}
                             <br />
-                            <label> Roadside Assistant</label>
+                            <label> {coverageData.coverageOptions[3].title}</label>
                             {coverageData.coverageOptions[3].options.map((dataItem, index) => {
                                 return <button type="button" className="rbtn btn-light" 
                                     key={index}
