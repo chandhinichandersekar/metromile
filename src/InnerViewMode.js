@@ -9,7 +9,7 @@ function InnerViewMode({ name, compDeductible, collDeductible, rentalCar, roadsi
                 <div className="row">
                     <div className="column-title" >
                         <p>Comprehensive Deductable</p>
-                        <p>Collison Deductib}le</p>
+                        <p>Collison Deductible</p>
                         <p>Rental Reimburtment</p>
                         <p>Roadside Assistance</p>
                     </div>

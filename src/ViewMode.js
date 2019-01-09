@@ -3,6 +3,7 @@ import EditMode from './EditMode';
 import CoverageChange from './CoverageChange';
 import './App.css';
 import InnerViewMode from './InnerViewMode';
+import { pick } from 'lodash';
 
 const pages = {
     view: 0,
@@ -47,6 +48,14 @@ class ViewMode extends Component {
         ));
     }
 
+    handleCancel() {
+        this.setState({
+            changes: pick(this.state, 'name', 'compDeductible', 'collDeductible', 'rentalCar', 'roadside'),
+            currentPage: pages.view
+        });
+
+    }
+
     render() {
         const innerViewModeProps = {
             ...this.state,
@@ -58,7 +67,12 @@ class ViewMode extends Component {
             return (
                 <React.Fragment>
                     <EditMode vehicleData={this.state} handleChangesFromEditMode={this.handleChangesFromEditMode.bind(this)} />
-                    <CoverageChange changes={this.state.changes} handleSave={this.handleSave.bind(this)} />
+                    <CoverageChange 
+                        oldData={this.state} 
+                        changes={this.state.changes} 
+                        handleSave={this.handleSave.bind(this)} 
+                        handleCancel={this.handleCancel.bind(this)}
+                    />
                 </React.Fragment>
             );
         }
