@@ -62,10 +62,15 @@ class ViewMode extends Component {
             editCoverageClick: this.editCoverageClick.bind(this)
         }
         if (this.state.currentPage === pages.view) {
-            return <InnerViewMode {...innerViewModeProps} />;
+            return ( <React.Fragment>
+                <h2>View Mode</h2>
+                <InnerViewMode {...innerViewModeProps} />
+            </React.Fragment>
+             );
         } else {
             return (
                 <React.Fragment>
+                     <h2>Edit Mode</h2>
                     <EditMode vehicleData={this.state} handleChangesFromEditMode={this.handleChangesFromEditMode.bind(this)} />
                     <CoverageChange 
                         oldData={this.state} 

@@ -9,7 +9,7 @@
   color: #17a2b8;
   background:none;
   border:none; 
-  padding:0;
+  padding:20px;
   cursor: pointer;
 }
 .card-footer {
@@ -25,3 +25,17 @@
 label {
   display: block;
 }
+.btn {
+  width: 25%;
+  height: 50px;
+}
+.rbtn {
+  width: 50%;
+  height: 50px;
+}
+.changes {
+  float: right;
+}
+ h2 {
+   margin: 50px;
+ }

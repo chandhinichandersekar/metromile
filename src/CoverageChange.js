@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Layout from './Layout';
 
 function showChange(oldValue, newValue) {
- return `${oldValue} => ${newValue}`
+ return `${oldValue} --> ${newValue}`
 }
 
 class CoverageChange extends Component {
@@ -15,7 +15,7 @@ class CoverageChange extends Component {
         if (this.props.oldData[vehicleProperty].name === this.props.changes[vehicleProperty].name) {
             return null;
         } else {
-            return <label> {title} {this.makeValues(vehicleProperty)}</label>
+            return <label> {title} <span className='changes'>{this.makeValues(vehicleProperty)}</span></label>
         }
     }
 

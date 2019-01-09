@@ -6,20 +6,10 @@ function InnerViewMode({ name, compDeductible, collDeductible, rentalCar, roadsi
         <Layout title={name}>
         <div className="card-block">
             <div className="card-text">
-                <div className="row">
-                    <div className="column-title" >
-                        <p>Comprehensive Deductable</p>
-                        <p>Collison Deductible</p>
-                        <p>Rental Reimburtment</p>
-                        <p>Roadside Assistance</p>
-                    </div>
-                    <div className="column-value">
-                        <p>{compDeductible.name}</p>
-                        <p>{collDeductible.name}</p>
-                        <p>{rentalCar.name}</p>
-                        <p>{roadside.name}</p>
-                    </div>
-                </div>
+                        <label>Comprehensive Deductable <span className='changes'>{compDeductible.name}</span></label>
+                        <label>Collison Deductible <span className='changes'>{collDeductible.name}</span></label>
+                        <label>Rental Reimburtment <span className='changes'>{rentalCar.name}</span></label>
+                        <label>Roadside Assistance <span className='changes'>{roadside.name}</span></label>
             </div>
             <div className="card-footer">
                 <button className='editCoverage' onClick={editCoverageClick}>EDIT COVERAGE</button>
